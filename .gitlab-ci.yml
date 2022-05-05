@@ -1,0 +1,3 @@
+include:
+  - project: 'controls-ci/templates'
+    file: 'epics/module/default_build_deploy.yml'
