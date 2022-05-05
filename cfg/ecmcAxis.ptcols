@@ -1,0 +1,9 @@
+writeHomeOffset{
+  out "Cfg.SetAxisEncOffset(\$1,%f)";
+  in "OK";
+}
+
+writeCmdFloat{
+  out "Cfg.\$1(\$2,%f)";
+  in "OK";
+}

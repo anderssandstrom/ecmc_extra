@@ -1,0 +1,43 @@
+record(ai,    "${SYS}${AXIS_NAME}-setPosition"){
+  field(EGU,  "${EGU=mm}")
+  field(PREC, "${PREC=3}")
+  field(DESC, "desired postion")
+  field(FLNK, "${SYS}${AXIS_NAME}-setHomeOffset_.PROC")
+}
+# ||
+# ||
+# \/
+record(seq, "${SYS}${AXIS_NAME}-setHomeOffset_"){
+  field(DESC, "seq for HO adjustment")
+  # disable axis
+  field(DO0,  1)
+  field(LNK0, "${SYS}${AXIS_NAME}-resetHomeOffset.PROC PP")
+  field(DLY1, 0.1)
+  field(DOL1, "${SYS}${AXIS_NAME}-PosAct")
+  field(LNK1, "${SYS}${AXIS_NAME}-homeOffset_.B PP")
+}
+
+#- disable axis and reset home offset to Zero
+record(seq, "${SYS}${AXIS_NAME}-resetHomeOffset"){
+  field(DESC, "seq for clearing HO")
+  # disable axis
+  field(DO0,  0)
+  field(LNK0, "${SYS}${AXIS_NAME}-EnaCmd PP")
+  # set applied offset to Zero
+  field(DO1,  0)
+  field(LNK1, "${SYS}${AXIS_NAME}-SetAxisEncOffset PP")
+}
+
+#- calc home offset from posAct w/o applied offset and desired position
+record(calcout, "${SYS}${AXIS_NAME}-homeOffset_"){
+  field(DESC, "calc and apply home offset")
+  field(EGU,  "${EGU=mm}")
+  field(PREC, "${PREC=3}")
+  field(INPA, "${SYS}${AXIS_NAME}-setPosition")
+  field(INPI, "${SYS}${AXIS_NAME}-EnaCmd")
+  # calc desired offset, apply only if axis is disabled
+  field(CALC, "!I?A-B:Nan")
+  field(IVOA, "Don't drive outputs")
+  field(OUT,  "${SYS}${AXIS_NAME}-SetAxisEncOffset PP")
+}
+

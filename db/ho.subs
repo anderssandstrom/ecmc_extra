@@ -1,0 +1,9 @@
+file "writeCmdFloat.db"{
+  pattern {SYS,     MCU_PORT,   NAME,           AXIS_ID,      EGU,  PREC, DESC,           CMD                 }
+          {"${P}",  "${PORT}",  "${AXIS_NAME}", "${AXIS_NO}", "mm", 3,    "home offset",  "SetAxisEncOffset"  }
+}
+
+file "setHomeOffset.db"{
+  pattern {SYS,     NAME,           EGU,  PREC  }
+          {"${P}",  "${AXIS_NAME}", "mm", 3     }
+}

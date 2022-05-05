@@ -1,0 +1,7 @@
+record(ao,    "${SYS}${AXIS_NAME}-${CMD}") {
+  field(DTYP, "stream")
+  field(OUT,  "@ecmcAxis.ptcols writeCmdFloat(${CMD},${AXIS_ID}) ${MCU_PORT}")  
+  field(DESC, "$(DESC=)")
+  field(EGU,  "$(EGU=)")
+  field(PREC, "$(PREC=)")
+}
