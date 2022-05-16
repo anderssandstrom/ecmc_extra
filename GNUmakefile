@@ -3,6 +3,8 @@ include /ioc/tools/driver.makefile
 # build for EPICS_Version >=7 only
 EXCLUDE_VERSIONS = 3
 
+BUILDCLASSES = Linux
+
 # build only for Debian10
 ARCH_FILTER = deb10%
 
